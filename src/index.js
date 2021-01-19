@@ -1,12 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux'
+import store from './store'
+import Routes from './containers/Routes'
+import "bootswatch/dist/cyborg/bootstrap.min.css";
 
-ReactDOM.render(
+render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <Routes />
+    </Provider>,
   </React.StrictMode>,
   document.getElementById('root')
 );
