@@ -1,12 +1,12 @@
 import '../App.css';
 import { Menu } from '../components'
+import { Campuses } from '../containers'
 
-function Root() {
+function Root({ children }) {
   return (
     <div className="App">
-      <Menu />
       <header className="App-header">
-        <h1>Test</h1>
+      <Campuses />
       </header>
     </div>
   );

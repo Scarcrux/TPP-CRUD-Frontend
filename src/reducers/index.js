@@ -1,50 +1,28 @@
 const initialState = {
-  credits: [],
-  debits: [],
-  debitsTotal: 0,
-  creditsTotal: 0,
-  accountBalance: 0
+  campuses: []
 };
 
 function rootReducer(state = initialState, action) {
-  if (action.type === "ADD_CREDIT") {
+  if (action.type === "ADD_CAMPUS") {
     return Object.assign({}, state, {
-      credits: state.credits.concat(action.payload),
-      creditsTotal: parseFloat(state.creditsTotal) + parseFloat(action.payload.amount),
-      accountBalance: parseFloat(state.accountBalance) + parseFloat(action.payload.amount)
+      campuses: state.campuses.concat(action.payload)
     });
   }
-  if (action.type === "ADD_DEBIT") {
+  if (action.type === "GET_CAMPUSES") {
     return Object.assign({}, state, {
-      debits: state.debits.concat(action.payload),
-      debitsTotal: parseFloat(state.debitsTotal) + parseFloat(action.payload.amount),
-      accountBalance: parseFloat(state.accountBalance) - parseFloat(action.payload.amount)
+      campuses: action.payload
     });
   }
-  if (action.type === "LOAD_BALANCE") {
-    let credits = state.credits.reduce((acc, item) => acc + item.amount, 0)
-    let debits = state.debits.reduce((acc, item) => acc + item.amount, 0)
-    let balance = parseFloat(credits) - parseFloat(debits);
+  if (action.type === "REMOVE_CAMPUS") {
+    const deletedCampus = state.filter(campus => campus.id !== action.payload.id);
     return Object.assign({}, state, {
-      accountBalance: balance
+      campuses: deletedCampus
     });
   }
-  if (action.type === "LOAD_CREDITS") {
-    let credits = action.payload.reduce((acc, item) => acc + item.amount, 0)
-    let debits = state.debits.reduce((acc, item) => acc + item.amount, 0)
+  if (action.type === "UPDATE_CAMPUS") {
+    const updatedCampus = state.map(campus => campus.id === action.payload.id ? action.payload : campus);
     return Object.assign({}, state, {
-      credits: state.credits.concat(action.payload),
-      creditsTotal: credits,
-      accountBalance: credits - debits
-    });
-  }
-  if (action.type === "LOAD_DEBITS") {
-    let credits = state.credits.reduce((acc, item) => acc + item.amount, 0)
-    let debits = action.payload.reduce((acc, item) => acc + item.amount, 0)
-    return Object.assign({}, state, {
-      debits: state.debits.concat(action.payload),
-      debitsTotal: debits,
-      accountBalance: credits - debits
+      campuses: updatedCampus
     });
   }
   return state;

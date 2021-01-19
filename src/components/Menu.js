@@ -23,15 +23,15 @@ const Menu = (props) => {
   return (
     <div>
       <Navbar className="navbar navbar-expand-lg navbar-dark bg-primary">
-        <NavbarBrand href={"/TPP-BankOfReactRedux"}>Bank of React</NavbarBrand>
+        <NavbarBrand href={"/"}>Campus Manager</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <NavLink tag={NavvLink} to="/TPP-BankOfReactRedux/credits">Credits</NavLink>
+              <NavLink tag={NavvLink} to="/campuses">Campuses</NavLink>
             </NavItem>
             <NavItem>
-            <NavLink tag={NavvLink} to="/TPP-BankOfReactRedux/debits">Debits</NavLink>
+            <NavLink tag={NavvLink} to="/students">Students</NavLink>
             </NavItem>
           </Nav>
           <NavLink href="https://www.techtalentpipeline.nyc/">TTP</NavLink>
