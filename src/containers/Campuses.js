@@ -51,11 +51,13 @@ const mapStateToProps = (state) => ({
   campuses: state.campuses.campuses
 });
 
-const mapDispatchToProps = dispatch => ({
-  addCampus: (campus) => dispatch(addCampus(campus)),
-  removeCampus: (campus) => dispatch(removeCampus(campus)),
-  updateCampus: (campus) => dispatch(updateCampus(campus)),
-});
+const mapDispatchToProps = dispatch => {
+  return {
+    addCampus: (campus) => dispatch(addCampus(campus)),
+    removeCampus: (campus) => dispatch(removeCampus(campus)),
+    updateCampus: (campus) => dispatch(updateCampus(campus)),
+  }
+};
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 export default connector(Campuses);
