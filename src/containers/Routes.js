@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Campuses, Root } from './'
+import { Campuses, Root, Students } from './'
 import { connect } from 'react-redux';
 import { Menu, NotFound } from '../components'
 import { getCampuses } from '../actions/campuses';
+import { getStudents } from '../actions/students';
 
 class Routes extends Component {
   componentDidMount () {
@@ -17,6 +18,7 @@ class Routes extends Component {
           <Switch>
             <Route exact path="/" component={Root} />
             <Route exact path="/campuses" component={Campuses} />
+            <Route exact path="/students" component={Students} />
             <Route component={NotFound} />
           </Switch>
       </Router>
@@ -29,6 +31,7 @@ const mapStateToProps = state => ({});
 const mapDispatchToProps = dispatch => ({
   fetchInitialData: () => {
     dispatch(getCampuses());
+    dispatch(getStudents());
   }
 });
 
