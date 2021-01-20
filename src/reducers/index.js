@@ -14,13 +14,13 @@ function rootReducer(state = initialState, action) {
     });
   }
   if (action.type === "REMOVE_CAMPUS") {
-    const deletedCampus = state.filter(campus => campus.id !== action.payload.id);
+    const deletedCampus = state.campuses.filter(campus => campus.id !== action.payload.id);
     return Object.assign({}, state, {
       campuses: deletedCampus
     });
   }
   if (action.type === "UPDATE_CAMPUS") {
-    const updatedCampus = state.map(campus => campus.id === action.payload.id ? action.payload : campus);
+    const updatedCampus = state.campuses.map(campus => campus.id === action.payload.id ? action.payload : campus);
     return Object.assign({}, state, {
       campuses: updatedCampus
     });
