@@ -4,8 +4,14 @@ import {
   CardTitle, CardSubtitle
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { removeCampus } from '../actions/campuses';
+import { connect } from 'react-redux';
 
 const CardCampus = (props) => {
+  function handleRemove () {
+    props.removeCampus(props.campus);
+  }
+
   return (
     <div>
       <Card style={{height:"450px"}}>
@@ -13,10 +19,29 @@ const CardCampus = (props) => {
         <CardBody>
           <CardTitle tag="h5">{props.name}</CardTitle>
           <Link to={`/campuses/${props.id}/`}><Button>Details</Button></Link>
+          <Button
+            onClick={handleRemove}>Delete
+          </Button>
         </CardBody>
       </Card>
     </div>
   );
 };
 
-export default CardCampus;
+const mapStateToProps = ({ campuses }, ownProps) => {
+  const campus = campuses.campuses.find(campus => campus.id === ownProps.id)
+  return {
+    campus
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    removeCampus: campusId => {
+      dispatch(removeCampus(campusId));
+    }
+  };
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+export default connector(CardCampus);

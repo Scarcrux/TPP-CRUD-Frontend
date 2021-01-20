@@ -42,7 +42,7 @@ const ViewCampus = (props) => {
 };
 
 const mapStateToProps = ({ campuses, students }, ownProps) => {
-  const campus = campuses.campuses.find(campus => campus.id === ownProps.id*1 )
+  const campus = campuses.campuses.find(campus => campus.id === ownProps.id )
   return {
     campus,
     students
