@@ -1,13 +1,8 @@
-'use strict';
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addCampus, removeCampus, updateCampus } from '../actions/campuses'
 
 class Campuses extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   handleSubmit = () => {
     const updateTest = this.props.campuses[1];
@@ -33,10 +28,12 @@ class Campuses extends Component {
 
   render () {
     const { campuses } = this.props;
-    const campusItemArr = campuses.map(campus => (
+   // console.log(campuses)
+    if (campuses !== "undefined") {
+       var campusItemArr = campuses.map(campus => (
       <li key={campus.id}>{campus.name} - {campus.imageUrl} - {campus.address} - {campus.description}</li>
     ));
-
+    }
     return (
       <div className="container">
         <div className="campus-list">
@@ -51,7 +48,7 @@ class Campuses extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  campuses: state.campuses
+  campuses: state.campuses.campuses
 });
 
 const mapDispatchToProps = dispatch => ({
