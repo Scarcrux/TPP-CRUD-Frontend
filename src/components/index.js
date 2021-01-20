@@ -1,2 +1,6 @@
+export { default as CardCampus } from './CardCampus'
+export { default as CardStudent } from './CardStudent'
 export { default as Menu } from './Menu'
 export { default as NotFound } from './NotFound'
+export { default as ViewCampus } from './ViewCampus'
+export { default as ViewStudent } from './ViewStudent'
