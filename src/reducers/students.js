@@ -14,10 +14,11 @@ function studentsReducer(state = initialState, action) {
     });
   }
   if (action.type === "REMOVE_STUDENT") {
-    const deletedStudent = state.students.filter(student => student.id !== action.payload.id);
-    return Object.assign({}, state, {
-      students: deletedStudent
-    });
+    const deletedStudents = [...state.students];
+    return {
+        ...state,
+        students: deletedStudents.filter(student => student.id !== action.payload.id)
+    };
   }
   if (action.type === "UPDATE_STUDENT") {
     const updatedStudent = state.students.map(student => student.id === action.payload.id ? action.payload : student);

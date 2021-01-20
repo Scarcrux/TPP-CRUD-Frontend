@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addStudent, removeStudent, updateStudent } from '../actions/students'
+import { CardStudent } from '../components'
+import { Container, Col, Row } from 'reactstrap'
 
 class Students extends Component {
   handleSubmit = () => {
@@ -32,18 +34,18 @@ class Students extends Component {
     console.log(students);
     let studentItemArr = [];
     if (students) { studentItemArr = students.map(student => (
-      <li key={student.id}>{student.firstName} - {student.lastName} - {student.email} - {student.imageUrl} - {student.gpa} - {student.campusId}</li>
+      <Col xs="3" s="3" m="3" l="3" xl="3"><CardStudent firstName={student.firstName} id={student.id} imageUrl={student.imageUrl} lastName={student.lastName} /></Col>
     ))};
 
     return (
-      <div className="container">
-        <div className="student-list">
-          <ul>{studentItemArr}</ul>
+      <Container>
+        <Row className="no-gutters">
+          {studentItemArr}
           <div><button onClick={this.handleSubmit}>Test Update</button></div>
           <div><button onClick={this.handleNewSubmit}>Test Create</button></div>
           <div><button onClick={this.handleRemove}>Test Delete</button></div>
-        </div>
-      </div>
+        </Row>
+      </Container>
     );
   }
 }
