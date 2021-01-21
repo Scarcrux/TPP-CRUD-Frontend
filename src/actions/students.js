@@ -24,9 +24,8 @@ export const getStudents = () => {
 export const removeStudent = (payload) => {
   return (dispatch) => {
     return axios.delete(`http://localhost:1337/api/students/${payload.id}`, payload)
-      .then(res => res.data)
-      .then(json => {
-        dispatch({ type: REMOVE_STUDENT, payload: json })
+      .then(() => {
+        dispatch({ type: REMOVE_STUDENT, payload })
       })
   };
 }

@@ -24,9 +24,8 @@ export const getCampuses = () => {
 export const removeCampus = (payload) => {
   return (dispatch) => {
     return axios.delete(`http://localhost:1337/api/campuses/${payload.id}`, payload)
-      .then(res => res.data)
-      .then(json => {
-        dispatch({ type: REMOVE_CAMPUS, payload: json })
+      .then(() => {
+        dispatch({ type: REMOVE_CAMPUS, payload })
       })
   };
 }

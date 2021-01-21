@@ -5,9 +5,7 @@ import { Campuses } from '../containers'
 function Root({ children }) {
   return (
     <div className="App">
-      <header className="App-header">
       <Campuses />
-      </header>
     </div>
   );
 }

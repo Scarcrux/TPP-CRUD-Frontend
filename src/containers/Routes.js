@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Menu, NotFound, ViewCampus, ViewStudent } from '../components'
 import { getCampuses } from '../actions/campuses';
 import { getStudents } from '../actions/students';
+import '../App.css';
 
 class Routes extends Component {
   componentDidMount () {
@@ -15,6 +16,7 @@ class Routes extends Component {
     return (
       <Router>
         <Menu />
+          <div className="App">
           <Switch>
             <Route exact path="/" component={Root} />
             <Route exact path="/campuses" component={Campuses} />
@@ -23,6 +25,7 @@ class Routes extends Component {
             <Route path='/students/:id' exact render={({match}) =>  <ViewStudent id={match.params.id} /> } />
             <Route component={NotFound} />
           </Switch>
+          </div>
       </Router>
     );
   }
