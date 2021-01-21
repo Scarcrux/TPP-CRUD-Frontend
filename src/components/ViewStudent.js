@@ -24,16 +24,16 @@ class ViewStudent extends Component {
     const { student, students, campuses, campus, deleteStudent, id } = this.props;
     if (student && campus !== null) {
     return (
-      <div id='student' className='studentsPadding'>
-              <img className='studentImage' src={student.imageUrl} />
+      <div>
+              <img src={student.imageUrl} />
               <div>
                 <h3> {student.firstName + " " + student.lastName} </h3>
-                <h3 className='email'> {student.email} </h3>
+                <h3> {student.email} </h3>
                 <h3> <span className={`badge ${student.gpa > 2.8 ? 'badge-secondary' : student.gpa > 2.0 ? 'badge-warning' : 'badge-danger'}`}> GPA: {student.gpa} </span> </h3>
               </div>
-              <div className='studentButtons'>
-                <Link to={`/students/${student.id}/edit`}><button className='btn btn-dark'>Edit</button></Link>&nbsp;
-                <button onClick={() => deleteStudent(student)} className='btn btn-danger'>Delete</button>
+              <div>
+                <Link to={`/students/${student.id}/edit`}><button>Edit</button></Link>&nbsp;
+                <button onClick={() => deleteStudent(student)}>Delete</button>
               </div>
           <br />
           <br />
@@ -41,7 +41,7 @@ class ViewStudent extends Component {
           {
             student && campus ?
             <div>
-              <h4 className='center'> This student is registered to: </h4>
+              <h4> This student is registered to: </h4>
               <div>
                 <ul>
                 <li>{campus.name}</li>
@@ -50,19 +50,19 @@ class ViewStudent extends Component {
             </div>
             :
             <div>
-              <h3 className='center'> This student is not registered to a campus! </h3>
-              <h4 className='center'> Please add them to a Campus: </h4>
+              <h3> This student is not registered to a campus! </h3>
+              <h4> Please add them to a Campus: </h4>
             </div>
           }
-          {<form className='center' onSubmit={this.update}>
-            <select className='dropdown' defaultValue={this.state.campusId} onChange={ev => this.setState({ campusId: ev.target.value })}>
+          {<form onSubmit={this.update}>
+            <select defaultValue={this.state.campusId} onChange={ev => this.setState({ campusId: ev.target.value })}>
               <option value='null'> --- Unenrolled --- </option>
               { campuses.campuses.map(campus => {
                   return <option key={campus.id} value={campus.id}> {campus.name} </option>
                 })
               }
             </select>
-            <button className='btn btn-light btn-sm buttonSpacing'> {campus ? 'Change Campus' : 'Add to Campus'} </button>
+            <button> {campus ? 'Change Campus' : 'Add to Campus'} </button>
           </form>}
         </div>
       </div>
@@ -74,9 +74,9 @@ class ViewStudent extends Component {
 
 
 const mapStateToProps = ({students, campuses}, {id}) => {
-  console.log(students.students);
+  //console.log(students.students);
   const student = students.students.find(student => student.id == id);
-  console.log(student)
+  //console.log(student)
   const campus = student ? campuses.campuses.find(campus => campus.id == student.campusId) : null;
   return {
     students,
