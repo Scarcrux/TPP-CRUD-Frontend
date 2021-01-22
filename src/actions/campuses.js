@@ -33,9 +33,8 @@ export const removeCampus = (payload) => {
 export const updateCampus = (payload) => {
   return (dispatch) => {
     return axios.put(`http://localhost:1337/api/campuses/${payload.id}`, payload)
-      .then(res => res.data)
-      .then(json => {
-        dispatch({ type: UPDATE_CAMPUS, payload: json })
+      .then(() => {
+        dispatch({ type: UPDATE_CAMPUS, payload })
       })
   };
 }

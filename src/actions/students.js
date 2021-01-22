@@ -32,10 +32,10 @@ export const removeStudent = (payload) => {
 
 export const updateStudent = (payload) => {
   return (dispatch) => {
+    console.log("payload" + JSON.stringify(payload))
     return axios.put(`http://localhost:1337/api/students/${payload.id}`, payload)
-      .then(res => res.data)
-      .then(json => {
-        dispatch({ type: UPDATE_STUDENT, payload: json })
+      .then(() => {
+        dispatch({ type: UPDATE_STUDENT, payload })
       })
   };
 }
