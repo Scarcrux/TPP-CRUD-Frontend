@@ -17,8 +17,7 @@ const CardCampus = (props) => {
       <Card style={{height:"450px"}}>
         <CardImg top width="100%" src={props.imageUrl} alt="Card image cap" />
         <CardBody>
-          <CardTitle tag="h5">{props.name}</CardTitle>
-          <Link to={`/campuses/${props.id}/`}><Button>Details</Button></Link>
+        <Link to={`/campuses/${props.id}/`}><CardTitle tag="h5">{props.name}</CardTitle></Link>
           <Button
             onClick={handleRemove}>Delete
           </Button>

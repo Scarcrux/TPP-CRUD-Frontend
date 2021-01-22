@@ -30,7 +30,7 @@ class Campuses extends Component {
 
   render () {
     const { campuses } = this.props;
-   // console.log(campuses)
+    console.log(campuses)
     if (campuses !== "undefined") {
        var campusItemArr = campuses.map(campus => (
         <Col xs="4" s="4" m="4" l="4" xl="4"><CardCampus id={campus.id} name={campus.name} imageUrl={campus.imageUrl} /></Col>

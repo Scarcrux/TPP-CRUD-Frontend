@@ -32,7 +32,7 @@ class ViewStudent extends Component {
                 <h3> <span className={`badge ${student.gpa > 2.8 ? 'badge-secondary' : student.gpa > 2.0 ? 'badge-warning' : 'badge-danger'}`}> GPA: {student.gpa} </span> </h3>
               </div>
               <div>
-                <Link to={`/students/${student.id}/edit`}><button>Edit</button></Link>&nbsp;
+                <Link to={`/students/edit/${student.id}/`}><button>Edit</button></Link>&nbsp;
                 <button onClick={() => deleteStudent(student)}>Delete</button>
               </div>
           <br />
