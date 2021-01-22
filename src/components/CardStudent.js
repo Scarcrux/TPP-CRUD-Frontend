@@ -18,7 +18,7 @@ const CardStudent = (props) => {
         <CardImg top width="100%" src={props.imageUrl} alt="Card image cap" />
         <CardBody>
         <Link to={`/students/${props.id}/`}><CardTitle tag="h5">{props.firstName + " " + props.lastName}</CardTitle></Link>
-          <Button
+          <Button color="warning"
             onClick={handleRemove}>Delete
           </Button>
         </CardBody>

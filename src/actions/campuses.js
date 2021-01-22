@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const addCampus = (payload) => {
   return (dispatch) => {
-    return axios.post(`http://localhost:1337/api/campuses`, payload)
+    return axios.post(`https://tpp-crud-backend.herokuapp.com//campuses`, payload)
       .then(res => res.data)
       .then(json => {
         dispatch({ type: ADD_CAMPUS, payload: json })
@@ -13,7 +13,7 @@ export const addCampus = (payload) => {
 
 export const getCampuses = () => {
   return (dispatch) => {
-    return fetch('http://localhost:1337/api/campuses')
+    return fetch('https://tpp-crud-backend.herokuapp.com/campuses')
       .then(res => res.json())
       .then(json => {
         dispatch({ type: GET_CAMPUSES, payload: json });
@@ -23,7 +23,7 @@ export const getCampuses = () => {
 
 export const removeCampus = (payload) => {
   return (dispatch) => {
-    return axios.delete(`http://localhost:1337/api/campuses/${payload.id}`, payload)
+    return axios.delete(`https://tpp-crud-backend.herokuapp.com/campuses/${payload.id}`, payload)
       .then(() => {
         dispatch({ type: REMOVE_CAMPUS, payload })
       })
@@ -32,7 +32,7 @@ export const removeCampus = (payload) => {
 
 export const updateCampus = (payload) => {
   return (dispatch) => {
-    return axios.put(`http://localhost:1337/api/campuses/${payload.id}`, payload)
+    return axios.put(`https://tpp-crud-backend.herokuapp.com/campuses/${payload.id}`, payload)
       .then(() => {
         dispatch({ type: UPDATE_CAMPUS, payload })
       })

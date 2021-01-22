@@ -16,11 +16,12 @@ const CardCampus = (props) => {
     <div>
       <Card style={{height:"450px"}}>
         <CardImg top width="100%" src={props.imageUrl} alt="Card image cap" />
-        <CardBody>
+        <CardBody className="d-flex flex-column">
         <Link to={`/campuses/${props.id}/`}><CardTitle tag="h5">{props.name}</CardTitle></Link>
-          <Button
+        {props.enrolled && <CardSubtitle tag="h6" className="mb-2 text-muted">{props.enrolled + " Students"}</CardSubtitle>}
+          {props.delete && <Button style={{width:"50%"}} className="align-self-end mt-auto" color="warning"
             onClick={handleRemove}>Delete
-          </Button>
+          </Button>}
         </CardBody>
       </Card>
     </div>
