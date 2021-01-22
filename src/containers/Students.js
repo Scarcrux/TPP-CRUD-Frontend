@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addStudent, removeStudent, updateStudent } from '../actions/students'
 import { CardStudent } from '../components'
-import { Container, Col, Row } from 'reactstrap'
+import { Container, Col, Row, Button } from 'reactstrap'
+import { Link } from 'react-router-dom';
 
 class Students extends Component {
   handleSubmit = () => {
@@ -34,17 +35,25 @@ class Students extends Component {
     console.log(students);
     let studentItemArr = [];
     if (students) { studentItemArr = students.map(student => (
-      <Col xs="3" s="3" m="3" l="3" xl="3"><CardStudent firstName={student.firstName} id={student.id} imageUrl={student.imageUrl} lastName={student.lastName} /></Col>
+      <Col xs="12" s="6" m="3" l="3" xl="3"><CardStudent firstName={student.firstName} id={student.id} imageUrl={student.imageUrl} lastName={student.lastName} /></Col>
     ))};
 
     return (
       <Container>
+          <Link to='students/add'><Button className="float-right">Add Student</Button></Link>
+        <Row className="d-flex align-items-center">
+          <Col><h5>Students</h5></Col>
+        </Row>
         <Row className="no-gutters">
           {studentItemArr}
           <div><button onClick={this.handleSubmit}>Test Update</button></div>
           <div><button onClick={this.handleNewSubmit}>Test Create</button></div>
           <div><button onClick={this.handleRemove}>Test Delete</button></div>
         </Row>
+        {!studentItemArr && <Row>
+            <Col><h5>There are no students in the database.</h5></Col>
+            </Row>
+          }
       </Container>
     );
   }

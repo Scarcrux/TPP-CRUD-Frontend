@@ -1,54 +1,67 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { removeCampus } from '../actions/campuses';
 import { CardStudent } from '../components'
-import { Container, Col, Row } from 'reactstrap'
+import { Button, Container, Col, Row } from 'reactstrap'
+import { Redirect } from 'react-router-dom'
 
 const ViewCampus = (props) => {
-  console.log(props)
+  const [redirect, setRedirect] = useState(false);
   const { students, campuses, id } = props;
   const campus = campuses.campuses.find(campus => campus.id == id )
-  console.log("campus" + campus)
-  console.log(campuses.campuses)
+
   if (!campus) return null;
   const studentArr = students.students.filter(student => student.campusId === campus.id);
-  const studentItemArr = studentArr.map(student => (
-    <Col xs="12" s="6" m="3" l="3" xl="3"><CardStudent firstName={student.firstName} id={student.id} imageUrl={student.imageUrl} lastName={student.lastName} /></Col>
-  ));
+
+  const handleDelete = () => {
+    props.removeCampus(campus);
+    setRedirect(true);
+  }
+
+  if (redirect) {
+    return (<Redirect to={`/campuses/`}/>)
+  }
+
   return (
-    <div>
-      <div>
-        <img src={campus.imageUrl} />
-        <div>
-          <div>
-            <h1> {campus.name} </h1>
+
+    <Container>
+      <Row>
+        <Col><img src={campus.imageUrl} /></Col>
+
+        <Col>
+          <Row>
+            <h5> {campus.name} </h5>
+          </Row>
+          <Row>
             <p> {campus.description} </p>
-            <h5> Located At: </h5>
-            <h6> {campus.address} </h6>
-          </div>
-          <div>
-            <Link to={`/campuses/edit/${campus.id}/`} params={{campus: campus.id}}><button className='btn btn-dark'>Edit</button></Link>&nbsp;
-            <button onClick={() => props.deleteCampus(campus)} className='btn btn-danger'>Delete</button>
-          </div>
-        </div>
-      </div>
-      <div>
-        <h1>Students on Campus</h1>
-        <Link to={`/students/add`}><button> Add Student </button></Link>
-      </div>
-      <Container>
-        <Row>
-        {
+
+          </Row>
+        </Col>
+      </Row>
+      <Row>
+          <Col> <h6> {campus.address} </h6></Col>
+          <Col><Link to={`/campuses/edit/${campus.id}/`} params={{campus: campus.id}}><Button>Edit</Button></Link>&nbsp;
+            <Button onClick={handleDelete} color='warning'>Delete</Button></Col>
+          </Row>
+      <Row>
+        <Col>
+          <h5>Students on Campus</h5>
+        </Col>
+        <Col>
+        <Link to={`/students/add`}><Button> Add Student </Button></Link>
+        </Col>
+      </Row>
+        <Row>{
           studentArr.length ?
           studentArr.map(student => (
-            <Col xs="12" s="6" m="3" l="3" xl="3"><CardStudent firstName={student.firstName} id={student.id} imageUrl={student.imageUrl} lastName={student.lastName} /></Col>
+            <Col xs="3" s="3" m="3" l="3" xl="3"><CardStudent firstName={student.firstName} id={student.id} imageUrl={student.imageUrl} lastName={student.lastName} /></Col>
           ))
-          : <div className='center'> There are no students currently enrolled at {campus.name} </div>
+          : <Col> There are no students currently enrolled at {campus.name} </Col>
         }
         </Row>
-      </Container>
-    </div>
+    </Container>
   )
 };
 

@@ -68,7 +68,7 @@ class EditStudent extends Component {
     return (
       <Container>
         <Row className="d-flex justify-content-center" style={{width:"100%"}}>
-          <AvForm onSubmit={this.handleSubmit}>
+          <AvForm onValidSubmit={this.handleSubmit}>
             {/* With AvGroup AvInput and AvFeedback to build your own */}
             <AvGroup>
               <Label for="firstName">First Name</Label>

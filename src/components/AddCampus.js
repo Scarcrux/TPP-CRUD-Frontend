@@ -48,7 +48,7 @@ class AddCampus extends Component {
     return (
       <Container>
         <Row className="d-flex justify-content-center" style={{width:"100%"}}>
-          <AvForm onSubmit={this.handleSubmit}>
+          <AvForm onValidSubmit={this.handleSubmit}>
             {/* With AvGroup AvInput and AvFeedback to build your own */}
             <AvGroup>
               <Label for="name">Name</Label>
@@ -58,13 +58,13 @@ class AddCampus extends Component {
             </AvGroup>
             <AvGroup>
               <Label for="address">Address</Label>
-              <AvInput name="address" type="text" id="address" onChange={this.handleChange} style={{height:"100px"}} required />
+              <AvInput name="address" type="textarea" id="address" onChange={this.handleChange} style={{height:"100px"}} required />
               {/* this only shows when there is an error, use reactstrap's FormFeedback if you want is to always be displayed */}
               <AvFeedback>Enter an address.</AvFeedback>
             </AvGroup>
             <AvGroup>
               <Label for="description">Description</Label>
-              <AvInput name="description" type="text" id="description" style={{height:"200px"}} onChange={this.handleChange} required />
+              <AvInput name="description" type="textarea" id="description" style={{height:"200px", width:"400px"}} onChange={this.handleChange} required />
               {/* this only shows when there is an error, use reactstrap's FormFeedback if you want is to always be displayed */}
               <AvFeedback>Enter a description.</AvFeedback>
             </AvGroup>
