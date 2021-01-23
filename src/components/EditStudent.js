@@ -93,9 +93,9 @@ class EditStudent extends Component {
               <AvFeedback>Enter a valid URL.</AvFeedback>
             </AvGroup>
             <AvGroup>
-              <AvField type="select" id="campusId" name="select" label="Assign Student to a Campus" onChange={this.handleIdChange}>
-              <option key={0} value={null}> {"Select a Campus"} </option>
-                {campusOptions}
+              <AvField type="select" id="campusId" name="select" defaultValue={this.state.student.campusId} label="Campus" onChange={this.handleIdChange}>
+              <option value='null'> --- Unenrolled --- </option>
+              {campusOptions}
               </AvField>
             </AvGroup>
             <FormGroup>
