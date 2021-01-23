@@ -82,7 +82,7 @@ class AddStudent extends Component {
               <AvFeedback>Enter a valid URL.</AvFeedback>
             </AvGroup>
             <AvGroup>
-              <AvField type="select" name="select" label="Assign Student to a Campus" onChange={this.handleChange}>
+              <AvField type="select" name="campusId" id="campusId" label="Assign Student to a Campus" onChange={this.handleChange}>
               <option key={0} value={null}> {"Select a Campus"} </option>
                 {campusOptions}
               </AvField>
