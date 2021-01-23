@@ -39,8 +39,9 @@ class ViewStudent extends Component {
         <br></br>
         <br></br>
         <div className="mx-auto">
-          <img src={student.imageUrl} />
+          <img style={{width: "300px", height: "300px"}} src={student.imageUrl} />
           <div>
+          <br></br>
             <h5> {student.firstName + " " + student.lastName} </h5>
             <h7> {student.email} </h7>
             <br></br>
@@ -50,7 +51,7 @@ class ViewStudent extends Component {
         </div>
         <br></br>
         <div>
-          <Link to={`/students/edit/${student.id}/`}><Button color="primary">Edit</Button></Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <Link to={`/students/edit/${student.id}/`}><Button color="primary">Edit</Button></Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <Button onClick={this.delete} color="warning">Delete</Button>
         </div>
           <br />

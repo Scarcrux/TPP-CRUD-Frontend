@@ -28,7 +28,7 @@ const ViewCampus = (props) => {
     <Container>
       <br></br><br></br>
       <Row>
-        <Col><img src={campus.imageUrl} /></Col>
+        <Col><img src={campus.imageUrl} style={{width: "640px", height: "480px"}}/></Col>
         <Col>
           <Row className="d-flex flex-column">
             <h5> {campus.name} </h5>
