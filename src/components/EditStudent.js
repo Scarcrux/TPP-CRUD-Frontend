@@ -111,7 +111,7 @@ class EditStudent extends Component {
 }
 
 const mapStateToProps = ({ campuses, students }, {id}) => {
-  const student = students.students.find(campus => campus)
+  const student = students.students.find(campus => campus.id == id)
   campuses = campuses.campuses;
   return {
     student,

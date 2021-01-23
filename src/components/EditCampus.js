@@ -36,7 +36,6 @@ class EditCampus extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    console.log(JSON.stringify(this.state))
     this.props.updateCampus(this.state.campus);
     this.setState({redirect: true})
   }
@@ -54,7 +53,6 @@ class EditCampus extends Component {
 
   render() {
     if (!this.props.campus) return null
-    console.log(this.props)
     if (this.state.redirect) {
       return (<Redirect to={`/campuses/${this.props.id}/`}/>)
     }
@@ -148,8 +146,8 @@ class EditCampus extends Component {
   }
 }
 
-const mapStateToProps = ({ campuses, students }) => {
-  const campus = campuses.campuses.find(campus => campus)
+const mapStateToProps = ({ campuses, students }, { id }) => {
+  const campus = campuses.campuses.find(campus => campus.id == id)
   return {
     campus,
     campuses,
