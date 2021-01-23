@@ -25,38 +25,39 @@ const ViewCampus = (props) => {
   }
 
   return (
-
     <Container>
+      <br></br><br></br>
       <Row>
         <Col><img src={campus.imageUrl} /></Col>
-
         <Col>
-          <Row>
+          <Row className="d-flex flex-column">
             <h5> {campus.name} </h5>
           </Row>
           <Row>
             <p> {campus.description} </p>
-
           </Row>
         </Col>
       </Row>
       <Row>
-          <Col> <h6> {campus.address} </h6></Col>
-          <Col><Link to={`/campuses/edit/${campus.id}/`} params={{campus: campus.id}}><Button>Edit</Button></Link>&nbsp;
-            <Button onClick={handleDelete} color='warning'>Delete</Button></Col>
-          </Row>
+        <Col> <br></br><h6> {campus.address} </h6></Col>
+        <Col><Link to={`/campuses/edit/${campus.id}/`} params={{campus: campus.id}}><Button color="primary">Edit</Button></Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <Button onClick={handleDelete} color='warning'>Delete</Button></Col>
+      </Row>
+      <br></br>
       <Row>
         <Col>
+        <br></br><br></br>
           <h5>Students on Campus</h5>
+          <br></br>
         </Col>
         <Col>
-        <Link to={`/students/add`}><Button> Add Student </Button></Link>
+          <Link to={`/students/add`}><Button color="success"> Add Student </Button></Link>
         </Col>
       </Row>
         <Row>{
           studentArr.length ?
           studentArr.map(student => (
-            <Col xs="3" s="3" m="3" l="3" xl="3"><CardStudent firstName={student.firstName} id={student.id} imageUrl={student.imageUrl} lastName={student.lastName} /></Col>
+            <Col xs="3" s="3" m="3" l="3" xl="3" className="mb-4"><CardStudent firstName={student.firstName} id={student.id} imageUrl={student.imageUrl} lastName={student.lastName} /></Col>
           ))
           : <Col> There are no students currently enrolled at {campus.name} </Col>
         }

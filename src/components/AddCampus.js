@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { AvForm, AvField, AvGroup, AvInput, AvFeedback, AvRadioGroup, AvRadio, AvCheckboxGroup, AvCheckbox } from 'availity-reactstrap-validation';
-import { Button, Label, FormGroup, Container, Row, Col } from 'reactstrap';
+import { AvForm, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
+import { Button, Label, FormGroup, Container, Row } from 'reactstrap';
 import { addCampus } from '../actions/campuses';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom'
-import { update } from 'lodash';
 class AddCampus extends Component {
   constructor(props) {
     super(props);
@@ -27,16 +26,11 @@ class AddCampus extends Component {
     const inputField = e.target.id
     const inputValue = e.target.value
     updatedCampus[inputField] = inputValue
-
     this.setState({campus: updatedCampus})
   }
 
-  handleSubmit(e, errors, values) {
-    //this.setState({errors, values});
-    //this.props.addCampus(this.state);
-    //return (<Redirect to="/campuses"/>)
+  handleSubmit(e) {
     e.preventDefault()
-   console.log(JSON.stringify(this.state))
     this.props.addCampus(this.state.campus);
     this.setState({redirect: true})
   }
@@ -47,6 +41,7 @@ class AddCampus extends Component {
     }
     return (
       <Container>
+        <br></br><br></br>
         <Row className="d-flex justify-content-center" style={{width:"100%"}}>
           <AvForm onValidSubmit={this.handleSubmit}>
             {/* With AvGroup AvInput and AvFeedback to build your own */}
@@ -75,15 +70,11 @@ class AddCampus extends Component {
               <AvFeedback>Enter a valid URL.</AvFeedback>
             </AvGroup>
             <FormGroup>
-              <Button>Submit</Button>
+              <Button color="success">Submit</Button>
             </FormGroup>
           </AvForm>
           </Row>
           <Row>
-          {this.state && <div >
-            <h5>Submission values</h5>
-            Values: <pre>{JSON.stringify(this.state, null, 2)}</pre>
-          </div>}
         </Row>
       </Container>
     );

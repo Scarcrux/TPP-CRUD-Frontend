@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const addStudent = (payload) => {
   return (dispatch) => {
-    return axios.post(`http://localhost:1337/api/students`, payload)
+    return axios.post(`https://tpp-crud-backend.herokuapp.com/students`, payload)
       .then(res => res.data)
       .then(json => {
         dispatch({ type: ADD_STUDENT, payload: json })

@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  Button, Card, CardText, CardBody, CardImg, CardLink,
-  CardTitle, CardSubtitle
-} from 'reactstrap';
+import { Button, Card, CardBody, CardImg,CardTitle } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { removeStudent } from '../actions/students';
 import { connect } from 'react-redux';
@@ -16,9 +13,9 @@ const CardStudent = (props) => {
     <div>
       <Card style={{height:"450px"}}>
         <CardImg top width="100%" src={props.imageUrl} alt="Card image cap" />
-        <CardBody>
+        <CardBody  className="d-flex flex-column">
         <Link to={`/students/${props.id}/`}><CardTitle tag="h5">{props.firstName + " " + props.lastName}</CardTitle></Link>
-          <Button color="warning"
+          <Button className="align-self-center mt-auto" color="warning"
             onClick={handleRemove}>Delete
           </Button>
         </CardBody>

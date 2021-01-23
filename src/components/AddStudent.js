@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { AvForm, AvField, AvGroup, AvInput, AvFeedback, AvRadioGroup, AvRadio, AvCheckboxGroup, AvCheckbox } from 'availity-reactstrap-validation';
+import { AvForm, AvField, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
 import { Button, Label, FormGroup, Container, Row, Col } from 'reactstrap';
 import { addStudent } from '../actions/students';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom'
-import { update } from 'lodash';
 class AddStudent extends Component {
   constructor(props) {
     super(props);
@@ -29,16 +28,11 @@ class AddStudent extends Component {
     const inputField = e.target.id
     const inputValue = e.target.value
     updatedStudent[inputField] = inputValue
-
     this.setState({student: updatedStudent})
   }
 
-  handleSubmit(e, errors, values) {
-    //this.setState({errors, values});
-    //this.props.addCampus(this.state);
-    //return (<Redirect to="/campuses"/>)
+  handleSubmit(e) {
     e.preventDefault()
-   console.log(JSON.stringify(this.state))
     this.props.addStudent(this.state.student);
     this.setState({redirect: true})
   }
@@ -48,12 +42,12 @@ class AddStudent extends Component {
       return (<Redirect to="/students"/>)
     }
     const { campuses } = this.props;
-//    console.log(campuses)
     const campusOptions = campuses.map(campus => {
       return <option key={campus.id} value={campus.id}> {campus.name} </option>
     });
     return (
       <Container>
+        <br></br><br></br>
         <Row className="d-flex justify-content-center" style={{width:"100%"}}>
           <AvForm onValidSubmit={this.handleSubmit}>
             {/* With AvGroup AvInput and AvFeedback to build your own */}
@@ -65,7 +59,7 @@ class AddStudent extends Component {
             </AvGroup>
             <AvGroup>
               <Label for="lastName">Last Name</Label>
-              <AvInput name="lastName" type="text" id="lastName" onChange={this.handleChange} required />
+              <AvInput name="lastName" type="text" id="lastName" style={{ width:"400px"}} onChange={this.handleChange} required />
               {/* this only shows when there is an error, use reactstrap's FormFeedback if you want is to always be displayed */}
               <AvFeedback>Enter a last name.</AvFeedback>
             </AvGroup>
@@ -88,21 +82,17 @@ class AddStudent extends Component {
               <AvFeedback>Enter a valid URL.</AvFeedback>
             </AvGroup>
             <AvGroup>
-              <AvField type="select" name="select" label="Assign Student to a Campus" onChange={this.handleChange} helpMessage="Idk, this is an example. Deal with it!">
+              <AvField type="select" name="select" label="Assign Student to a Campus" onChange={this.handleChange}>
               <option key={0} value={null}> {"Select a Campus"} </option>
                 {campusOptions}
               </AvField>
             </AvGroup>
             <FormGroup>
-              <Button>Submit</Button>
+              <Button color="success">Submit</Button>
             </FormGroup>
           </AvForm>
           </Row>
           <Row>
-          {this.state && <div >
-            <h5>Submission values</h5>
-            Values: <pre>{JSON.stringify(this.state, null, 2)}</pre>
-          </div>}
         </Row>
       </Container>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Button, Card, CardText, CardBody, CardImg, CardLink,
+  Button, Card, CardBody, CardImg,
   CardTitle, CardSubtitle
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
@@ -19,7 +19,7 @@ const CardCampus = (props) => {
         <CardBody className="d-flex flex-column">
         <Link to={`/campuses/${props.id}/`}><CardTitle tag="h5">{props.name}</CardTitle></Link>
         {props.enrolled && <CardSubtitle tag="h6" className="mb-2 text-muted">{props.enrolled + " Students"}</CardSubtitle>}
-          {props.delete && <Button style={{width:"50%"}} className="align-self-end mt-auto" color="warning"
+          {props.delete && <Button style={{width:"50%"}} className="align-self-center mt-auto" color="warning"
             onClick={handleRemove}>Delete
           </Button>}
         </CardBody>

@@ -1,5 +1,4 @@
 import '../App.css';
-import { Menu } from '../components'
 import { Campuses } from '../containers'
 
 function Root({ children }) {
