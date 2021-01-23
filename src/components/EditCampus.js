@@ -1,11 +1,10 @@
 import React, { Component, Fragment } from 'react';
-import { AvForm, AvField, AvGroup, AvInput, AvFeedback, AvRadioGroup, AvRadio, AvCheckboxGroup, AvCheckbox } from 'availity-reactstrap-validation';
+import { AvForm, AvField, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
 import { Button, Label, FormGroup, Container, Row, Col } from 'reactstrap';
 import { updateCampus } from '../actions/campuses';
 import { updateStudent } from '../actions/students';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom'
-import { update } from 'lodash';
 class EditCampus extends Component {
   constructor(props) {
     super(props);
@@ -32,16 +31,12 @@ class EditCampus extends Component {
     const inputField = e.target.id
     const inputValue = e.target.value
     updatedCampus[inputField] = inputValue
-
     this.setState({campus: updatedCampus})
   }
 
-  handleSubmit(e, errors, values) {
-    //this.setState({errors, values});
-    //this.props.addCampus(this.state);
-    //return (<Redirect to="/campuses"/>)
+  handleSubmit(e) {
     e.preventDefault()
-   console.log(JSON.stringify(this.state))
+    console.log(JSON.stringify(this.state))
     this.props.updateCampus(this.state.campus);
     this.setState({redirect: true})
   }
@@ -53,7 +48,6 @@ class EditCampus extends Component {
     const inputValue = this.state.campus.id;
     updatedStudent[inputField] = inputValue
     this.setState({student: updatedStudent})
-   //console.log(JSON.stringify(this.state.student))
     this.props.updateStudent(this.state.student);
     this.setState({allCampusesRedirect: true})
   }
@@ -73,89 +67,82 @@ class EditCampus extends Component {
     });
     return (
       <Fragment>
-      <Container>
-        <Row className="d-flex justify-content-center" style={{width:"100%"}}>
-          <AvForm onValidSubmit={this.handleSubmit}>
-            {/* With AvGroup AvInput and AvFeedback to build your own */}
-            <AvGroup>
-              <Label for="name">Name</Label>
-              <AvInput
-                name="name"
-                type="text"
-                id="name"
-                value={this.state.campus.name}
-                onChange={this.handleChange} required
-              />
-              {/* this only shows when there is an error, use reactstrap's FormFeedback if you want is to always be displayed */}
-              <AvFeedback>Enter a name.</AvFeedback>
-            </AvGroup>
-            <AvGroup>
-              <Label for="address">Address</Label>
-              <AvInput
-                name="address"
-                type="textarea"
-                id="address"
-                value={this.state.campus.address} onChange={this.handleChange}
-                style={{height:"100px", width:"400px"}} required
-              />
-              {/* this only shows when there is an error, use reactstrap's FormFeedback if you want is to always be displayed */}
-              <AvFeedback>Enter an address.</AvFeedback>
-            </AvGroup>
-            <AvGroup>
-              <Label for="description">Description</Label>
-              <AvInput
-                name="description"
-                type="textarea"
-                id="description"
-                value={this.state.campus.description}
-                style={{height:"200px"}}
-                onChange={this.handleChange} required
-              />
-              {/* this only shows when there is an error, use reactstrap's FormFeedback if you want is to always be displayed */}
-              <AvFeedback>Enter a description.</AvFeedback>
-            </AvGroup>
-            <AvGroup>
-              <Label for="imageUrl">Image URL</Label>
-              <AvInput
-                name="imageUrl"
-                type="url"
-                id="imageUrl"
-                value={this.state.campus.imageUrl}
-                onChange={this.handleChange} required
-              />
-              {/* this only shows when there is an error, use reactstrap's FormFeedback if you want is to always be displayed */}
-              <AvFeedback>Enter a valid URL.</AvFeedback>
-            </AvGroup>
-            <FormGroup>
-              <Button>Submit</Button>
-            </FormGroup>
-          </AvForm>
-          </Row>
-          <Row>
-            <Col>
-          {this.state && <div >
-            <h5>Submission values</h5>
-            Values: <pre>{JSON.stringify(this.state, null, 2)}</pre>
-          </div>}</Col>
-        </Row>
-      </Container>
-            <Container>
-            <Row className="d-flex justify-content-center" style={{width:"100%"}}>
-              <AvForm onSubmit={this.handleTransferSubmit}>
+        <br></br><br></br>
+        <Container>
+          <Row className="d-flex justify-content-center" style={{width:"100%"}}>
+            <AvForm onValidSubmit={this.handleSubmit}>
+              {/* With AvGroup AvInput and AvFeedback to build your own */}
               <AvGroup>
-              <AvField type="select" name="select" label="Assign Student to Campus" onChange={(ev) => this.setState({ student: this.props.students.students.find(student => student.id === ev.target.value*1)})}>
-              <option key={0} value={null}> {"Select a Student"} </option>
-                {studentOptions}
-              </AvField>
-            </AvGroup>
-            <FormGroup>
-              <Button>Transfer</Button>
-            </FormGroup>
-          </AvForm>
+                <Label for="name">Name</Label>
+                <AvInput
+                  name="name"
+                  type="text"
+                  id="name"
+                  value={this.state.campus.name}
+                  onChange={this.handleChange} required
+                />
+                {/* this only shows when there is an error, use reactstrap's FormFeedback if you want is to always be displayed */}
+                <AvFeedback>Enter a name.</AvFeedback>
+              </AvGroup>
+              <AvGroup>
+                <Label for="address">Address</Label>
+                <AvInput
+                  name="address"
+                  type="textarea"
+                  id="address"
+                  value={this.state.campus.address} onChange={this.handleChange}
+                  style={{height:"100px", width:"400px"}} required
+                />
+                {/* this only shows when there is an error, use reactstrap's FormFeedback if you want is to always be displayed */}
+                <AvFeedback>Enter an address.</AvFeedback>
+              </AvGroup>
+              <AvGroup>
+                <Label for="description">Description</Label>
+                <AvInput
+                  name="description"
+                  type="textarea"
+                  id="description"
+                  value={this.state.campus.description}
+                  style={{height:"200px"}}
+                  onChange={this.handleChange} required
+                />
+                {/* this only shows when there is an error, use reactstrap's FormFeedback if you want is to always be displayed */}
+                <AvFeedback>Enter a description.</AvFeedback>
+              </AvGroup>
+              <AvGroup>
+                <Label for="imageUrl">Image URL</Label>
+                <AvInput
+                  name="imageUrl"
+                  type="url"
+                  id="imageUrl"
+                  value={this.state.campus.imageUrl}
+                  onChange={this.handleChange} required
+                />
+                {/* this only shows when there is an error, use reactstrap's FormFeedback if you want is to always be displayed */}
+                <AvFeedback>Enter a valid URL.</AvFeedback>
+              </AvGroup>
+              <FormGroup>
+                <Button color="primary">Update</Button>
+              </FormGroup>
+            </AvForm>
+            </Row>
+        </Container>
+        <Container>
+          <Row className="d-flex justify-content-center" style={{width:"100%"}}>
+            <AvForm onSubmit={this.handleTransferSubmit}>
+              <AvGroup>
+                <AvField type="select" name="select" label="Assign Student to Campus" onChange={(ev) => this.setState({ student: this.props.students.students.find(student => student.id === ev.target.value*1)})}>
+                <option key={0} value={null}> {"Select a Student"} </option>
+                  {studentOptions}
+                </AvField>
+              </AvGroup>
+              <FormGroup>
+                <Button color="info">Transfer</Button>
+              </FormGroup>
+              <br></br>
+            </AvForm>
           </Row>
-          <Row>
-        </Row>
-      </Container>
+        </Container>
       </Fragment>
     );
   }

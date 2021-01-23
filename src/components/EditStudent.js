@@ -4,7 +4,6 @@ import { Button, Label, FormGroup, Container, Row, Col } from 'reactstrap';
 import { updateStudent } from '../actions/students';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom'
-import { update } from 'lodash';
 class EditStudent extends Component {
   constructor(props) {
     super(props);
@@ -31,7 +30,6 @@ class EditStudent extends Component {
     const inputField = e.target.id
     const inputValue = e.target.value
     updatedStudent[inputField] = inputValue
-
     this.setState({student: updatedStudent})
   }
 
@@ -40,39 +38,33 @@ class EditStudent extends Component {
     const inputField = e.target.id
     const inputValue = parseInt(e.target.value)
     updatedStudent[inputField] = inputValue
-
     this.setState({student: updatedStudent})
   }
 
-  handleSubmit(e, errors, values) {
-    //this.setState({errors, values});
-    //this.props.addCampus(this.state);
-    //return (<Redirect to="/campuses"/>)
+  handleSubmit(e) {
     e.preventDefault()
-   console.log(JSON.stringify(this.state.student))
     this.props.updateStudent(this.state.student);
     this.setState({redirect: true})
   }
 
   render() {
     if (!this.props.student) return null
-    console.log(this.props)
     if (this.state.redirect) {
       return (<Redirect to={`/students/${this.props.id}/`}/>)
     }
     const { campuses } = this.props;
-//    console.log(campuses)
     const campusOptions = campuses.map(campus => {
       return <option key={campus.id} value={campus.id}> {campus.name} </option>
     });
     return (
       <Container>
+        <br></br><br></br>
         <Row className="d-flex justify-content-center" style={{width:"100%"}}>
           <AvForm onValidSubmit={this.handleSubmit}>
             {/* With AvGroup AvInput and AvFeedback to build your own */}
             <AvGroup>
               <Label for="firstName">First Name</Label>
-              <AvInput name="firstName" type="text" id="firstName" value={this.state.student.firstName} onChange={this.handleChange} required />
+              <AvInput name="firstName" type="text" id="firstName" value={this.state.student.firstName} style={{ width:"400px"}} onChange={this.handleChange} required />
               {/* this only shows when there is an error, use reactstrap's FormFeedback if you want is to always be displayed */}
               <AvFeedback>Enter a first name.</AvFeedback>
             </AvGroup>
@@ -101,21 +93,17 @@ class EditStudent extends Component {
               <AvFeedback>Enter a valid URL.</AvFeedback>
             </AvGroup>
             <AvGroup>
-              <AvField type="select" id="campusId" name="select" label="Assign Student to a Campus" onChange={this.handleIdChange} helpMessage="Idk, this is an example. Deal with it!">
+              <AvField type="select" id="campusId" name="select" label="Assign Student to a Campus" onChange={this.handleIdChange}>
               <option key={0} value={null}> {"Select a Campus"} </option>
                 {campusOptions}
               </AvField>
             </AvGroup>
             <FormGroup>
-              <Button>Submit</Button>
+              <Button color="info">Update</Button>
             </FormGroup>
           </AvForm>
           </Row>
           <Row>
-          {this.state && <div >
-            <h5>Submission values</h5>
-            Values: <pre>{JSON.stringify(this.state, null, 2)}</pre>
-          </div>}
         </Row>
       </Container>
     );

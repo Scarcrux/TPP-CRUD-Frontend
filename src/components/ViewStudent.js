@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { removeStudent, updateStudent } from '../actions/students';
-import { Button, Container, Col, Row, Image, Form, Input } from 'reactstrap'
+import { Button, Container, Col, Row, Form, Input } from 'reactstrap'
 import { CardCampus } from '../components'
 class ViewStudent extends Component {
   constructor(props){
@@ -29,58 +29,61 @@ class ViewStudent extends Component {
   };
 
   render(){
-    //console.log(this.props);
-    const { student, students, campuses, campus, deleteStudent, id } = this.props;
+    const { student, campuses, campus } = this.props;
     if (this.state.firstName === "redirect") {
       return (<Redirect to={`/students/`}/>)
     }
-
     if (student && campus !== null) {
     return (
       <Container>
+        <br></br>
+        <br></br>
         <div className="mx-auto">
-            <img src={student.imageUrl} />
-
-
-        <div>
-          <h5> {student.firstName + " " + student.lastName} </h5>
-          <h7> {student.email} </h7>
-          <h3> <span className={`badge ${student.gpa > 2.8 ? 'badge-secondary' : student.gpa > 2.0 ? 'badge-warning' : 'badge-danger'}`}> GPA: {student.gpa} </span> </h3>
+          <img src={student.imageUrl} />
+          <div>
+            <h5> {student.firstName + " " + student.lastName} </h5>
+            <h7> {student.email} </h7>
+            <br></br>
+            <br></br>
+            <h3> <span className={`badge ${student.gpa > 2.8 ? 'badge-secondary' : student.gpa > 2.0 ? 'badge-warning' : 'badge-danger'}`}> GPA: {student.gpa} </span> </h3>
+          </div>
         </div>
-        </div>
+        <br></br>
         <div>
-          <Link to={`/students/edit/${student.id}/`}><Button>Edit</Button></Link>&nbsp;
-          <Button onClick={this.delete}>Delete</Button>
+          <Link to={`/students/edit/${student.id}/`}><Button color="primary">Edit</Button></Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <Button onClick={this.delete} color="warning">Delete</Button>
         </div>
           <br />
           <br />
         <div>
-          {
-            student && campus ?
+          {student && campus ?
             <Fragment>
-            <div>
-              <h5> This student is registered to: </h5>
-            </div>
-            <Row>
-              <Col className="mx-auto" xs="12" s="6" m="3" l="3" xl="3"><CardCampus delete={false} name={campus.name} id={campus.id} imageUrl={campus.imageUrl}  /></Col>
-            </Row>
+              <div>
+                <h5> This student is registered to: </h5>
+              </div>
+              <Row>
+                <Col className="mx-auto" xs="12" s="6" m="3" l="3" xl="3"><CardCampus delete={false} name={campus.name} id={campus.id} imageUrl={campus.imageUrl} /></Col>
+              </Row>
+              <br></br>
             </Fragment>
             :
             <div>
-              <h3> This student is not registered to a campus! </h3>
-              <h4> Please add them to a Campus: </h4>
+              <h5>This student is not registered to a campus! </h5>
+              <h5>Please add the student to a campus: </h5>
             </div>
           }
           {<Form onSubmit={this.update}>
             <Input className="mx-auto" type="select" style={{width: "300px"}}defaultValue={this.state.campusId} onChange={ev => this.setState({ campusId: ev.target.value })}>
               <option value='null'> --- Unenrolled --- </option>
-              { campuses.campuses.map(campus => {
+              {campuses.campuses.map(campus => {
                   return <option key={campus.id} value={campus.id}> {campus.name} </option>
                 })
               }
             </Input>
-            <Button> {campus ? 'Change Campus' : 'Add to Campus'} </Button>
+            <br></br>
+            <Button color="info"> {campus ? 'Transfer Campus' : 'Add to Campus'} </Button>
           </Form>}
+          <br></br>
         </div>
       </Container>
       )
@@ -89,11 +92,8 @@ class ViewStudent extends Component {
   };
 };
 
-
 const mapStateToProps = ({students, campuses}, {id}) => {
-  //console.log(students.students);
   const student = students.students.find(student => student.id == id);
-  //console.log(student)
   const campus = student ? campuses.campuses.find(campus => campus.id == student.campusId) : null;
   return {
     students,

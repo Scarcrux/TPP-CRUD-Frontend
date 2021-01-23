@@ -9,21 +9,23 @@ const Campuses = (props) => {
 
   if (campuses !== "undefined") {
       var campusItemArr = campuses.map(campus => {
-      return <Col xs="4" s="4" m="4" l="4" xl="4"><CardCampus id={campus.id} name={campus.name} imageUrl={campus.imageUrl} delete={true} enrolled={students.filter(student => student.campusId === campus.id).length} /></Col>
+      return <Col xs="4" s="4" m="4" l="4" xl="4" className="mb-4"><CardCampus id={campus.id} name={campus.name} imageUrl={campus.imageUrl} delete={true} enrolled={students.filter(student => student.campusId === campus.id).length} /></Col>
       });
 
     return (
       <Container>
-              <Link to='campuses/add'><Button className="float-right">Add Campus</Button></Link>
+        <br></br>
+        <Link to='campuses/add'><Button className="float-right" color="success">Add Campus</Button></Link>
         <Row className="d-flex align-items-center">
           <Col><h5>Campuses</h5></Col>
-        </Row>
+        </Row><br></br>
 
         <Row>
           {campusItemArr}
         </Row>
-          {!campusItemArr && <Row>
-            <Col><h5>There are no campuses in the database.</h5></Col>
+          {!campusItemArr &&
+            <Row>
+              <Col><h5>There are no campuses in the database.</h5></Col>
             </Row>
           }
       </Container>
